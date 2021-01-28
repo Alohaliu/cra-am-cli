@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+     <meta name="keywords" content="">
+     <meta name="description"content=""/>
+     <link rel="shortcut icon" href="" />
+
+     <meta property="og:title" content="">
+     <!-- <meta property="og:url" content=""/> -->
+     <meta property="og:image" content="">
+     <meta property="og:description" content="">
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!-- 引入talkingData -->
+    <script src="https://jic.talkingdata.com/app/h5/v1?appid=342D1D2234C3482DB1A86A56CBEA924D&vn=name&vc=1.0.1"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>华发投控产品通</title>
+    <header style ='margin:0 auto;width:0px;height:0px;overflow:hidden'>
+      <p id="shareDesc"></p>
+    </header>
+    <div style="display: none">
+      <img id='shareImg' width="100%" src="" style="position: absolute; top: 0; left: 0;">
+    </div>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+    <script>
+      // function getURLParameters(){
+      //   var url = window.location.href;
+      //   return (url.match(/([^?=&]+)(=([^&]*))/g) || []).reduce(
+      //     (a, v) => ((a[v.slice(0, v.indexOf('='))] = v.slice(v.indexOf('=') + 1)), a),
+      //   {});
+      // }
+      // // alert(JSON.stringify(getURLParameters()));
+      // if(!getURLParameters()['channelCode'] || getURLParameters()['channelCode']==='002-001'){
+      //   // alert(getURLParameters()['channelCode']);
+      //   var u = navigator.userAgent;
+      //   var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+      //   var flatform = isIOS ? 'ios' : 'android';
+      //   var cordovaPath = "%PUBLIC_URL%/" + flatform + '/cordova.js';
+      //   var script = window.document.createElement('script');
+      //   script.src = cordovaPath + '?version=' + new Date() * 1;
+      //   script.type = 'text/javascript';
+      //   script.async = false;
+      //   window.document.head.appendChild(script);
+      //   document.addEventListener('deviceready', function () {
+      //     getUser();
+      //     getLocation();
+      //     getDeviceInfo();
+      //   }, false);
+      // }
+      window.getUser = function(){
+        if (window.cordova) {
+          cordova.exec(function (success) {
+            //验证成功后
+            console.log('getUser:' + JSON.stringify(success))
+            setStorage('huafaUser',success || '{}');
+            setStorage('openId',success.uid)
+          }, function (error) {
+            //验证不成功，循环调用验证密码
+            // getUser();
+            // alert('Error: load cordova failed2222')
+          }, "MideaUser", "getUser", []);   
+      } else {
+          console.log("Error: load cordova failed");
+          // alert("load cordova failed");
+        }
+      }
+      window.getLocation = function(){
+        if (window.cordova) {
+          cordova.exec(function (success) {
+            //验证成功后
+            console.log('getLocation:' + JSON.stringify(success))
+            setStorage('huafaLocation',success || '{}')
+          }, function (error) {
+            //验证不成功，循环调用验证密码
+            // getUser();
+            // alert('getLocation Error:' + JSON.stringify(error));
+          }, "MideaMap", "location", ["0"]);   
+      } else {
+          console.log("Error: load cordova failed");
+          // alert("load cordova failed");
+        }
+      }
+
+      window.getDeviceInfo = function(){
+        if (window.cordova) {
+          cordova.exec(function (success) {
+            //验证成功后
+            console.log('getDeviceInfo:' + JSON.stringify(success))
+            setStorage('huafaDeviceInfo',success || '{}')
+          }, function (error) {
+            //验证不成功，循环调用验证密码
+            // getUser();
+            // alert(' getDeviceInfo Error:' + JSON.stringify(error))
+          }, "MideaCommon", "getDeviceInfo", []);   
+      } else {
+          console.log("Error: load cordova failed");
+          // alert("load cordova failed");
+        }
+      }
+      window.exitPage = function(){
+        if(window.cordova){
+          window.cordova.exec(function (success) {
+            console.log(success)
+          },function (error) {
+            console.log(error)
+          }, "MideaCommon", "exit", []);
+        }
+      }
+      window.openWebview = function(url){
+        cordova.exec(function (result) {
+        console.log("回调成功: " + JSON.stringify(result)); 
+        }, function (error) {
+          console.log("回调失败");
+        }, "MideaCommon", "openUrl", [url,"服务授权"]);
+      }
+      window.hideNav = function(){
+        cordova.exec(function (success) {
+        console.log(success)
+        }, function (error) {
+          console.log(error)
+        }, "MideaCommon", "hideNav", []);
+      }   
+      
+      window.parentFn = function(isAndroid,downLink){
+        console.log('进入下载点击事件',isAndroid);
+        if (!isAndroid) {
+          if (window.cordova) {
+            cordova.exec(function (success) {
+                console.log(success);
+              }, function (error) {
+              console.log(error);
+              }, "MideaCommon", "openSysBrowser", [downLink]);
+          }
+          if (window.parent) {
+            window.parent.location.href = downLink;
+          } else {
+            window.location.href = downLink;
+          }
+        } else {
+          window.location.href = downLink;
+        }
+      }
+
+    function setStorage(key, data, time) { // 存储数据
+      //   console.log('测试存储localStorage',key, data, time);
+      try{/* eslint-disable */
+        if (!localStorage) {
+          return false
+        }
+        if(!time || isNaN(time)) {
+          time = 60 * 60 * 24 * 7;
+        }
+        const cacheExpireDate = (new Date() - 1) + time*1000;
+        const cacheVal = { val: data, exp: cacheExpireDate };
+        localStorage.setItem(key, JSON.stringify(cacheVal));//存入缓存值
+        }catch (e) {
+        console.log(e)
+        }
+      };
+    </script> 
+      
+  </body>
+
+</html>

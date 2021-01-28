@@ -1,0 +1,32 @@
+{
+  "bin": {
+    "cra-antd-cli": "./bin/www"
+  },
+  "name": "cra-antd-cli",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alohaliu/cra-antd-cli.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alohaliu/cra-antd-cli/issues"
+  },
+  "homepage": "https://github.com/Alohaliu/cra-antd-cli#readme",
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "commander": "^4.0.1",
+    "download-git-repo": "^3.0.2",
+    "fs-extra": "^8.1.0",
+    "inquirer": "^7.0.0",
+    "ora": "^4.1.1",
+    "validate-npm-package-name": "^3.0.0",
+    "which": "^2.0.2"
+  }
+}

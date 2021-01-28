@@ -1,0 +1,112 @@
+/** rem 响应式布局 iphone 6 型号375宽度屏幕 下 1rem = 16px **/
+
+@media screen and (min-device-width: 320px) and(max-device-width: 359px) {
+    html {
+        font-size: 13.6533333px;
+    }
+  }
+  
+  @media screen and (min-device-width: 360px) and(max-device-width: 374px) {
+    html {
+        font-size: 15.36px;
+    }
+  }
+  
+  @media screen and (min-device-width: 375px) and(max-device-width: 399px) {
+    html {
+        font-size: 16px;
+    }
+  }
+  
+  @media screen and (min-device-width: 400px) and(max-device-width: 413px) {
+    html {
+        font-size: 17.0666667px;
+    }
+  }
+  
+  @media screen and (min-device-width: 414px) and(max-device-width: 439px) {
+    html {
+        font-size: 17.664px;
+    }
+  }
+  
+  @media screen and (min-device-width: 440px) and(max-device-width: 479px) {
+    html {
+        font-size: 18.77px;
+    }
+  }
+  
+  @media screen and (min-device-width: 480px) and(max-device-width: 519px) {
+    html {
+        font-size: 20.48px;
+    }
+  }
+  
+  @media screen and (min-device-width: 520px) and(max-device-width: 559px) {
+    html {
+        font-size: 22.19px;
+    }
+  }
+  
+  @media screen and (min-device-width: 560px) and(max-device-width: 599px) {
+    html {
+        font-size: 23.89px;
+    }
+  }
+  
+  @media screen and (min-device-width: 600px) {
+    html {
+        font-size: 25.6px;
+    }
+  }
+  
+  * {
+    margin: 0;
+  }
+  
+  html,
+  body {
+    width: 100%;
+    font-family: PingFangSC-Regular,sans-serif;
+    // -webkit-tap-highlight-color: transparent;
+  }
+  a {
+    text-decoration: none;
+  }
+  a,
+  a:link,
+  a:visited,
+  a:hover,
+  a:active {
+    text-decoration: none;
+    color: inherit;
+  }
+  ul,li{ 
+    padding:0;
+    margin:0;
+    list-style:none
+  }
+img.lazy1 {
+  position: relative;
+  &::after{
+    content: "";
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: url(../images/placeholder1.png) no-repeat center;
+  }
+}
+img.lazy2 {
+  position: relative;
+  &::after{
+    content: "";
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: url(../images/placeholder2.png) no-repeat center;
+  }
+}
