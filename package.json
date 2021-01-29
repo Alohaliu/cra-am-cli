@@ -1,8 +1,8 @@
 {
   "bin": {
-    "cra-antd-cli": "./bin/www"
+    "cra-am-cli": "./bin/www"
   },
-  "name": "cra-antd-cli",
+  "name": "cra-am-cli",
   "description": "",
   "version": "1.0.0",
   "main": "index.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Alohaliu/cra-antd-cli.git"
+    "url": "git+https://github.com/Alohaliu/cra-am-cli.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Alohaliu/cra-antd-cli/issues"
+    "url": "https://github.com/Alohaliu/cra-am-cli/issues"
   },
-  "homepage": "https://github.com/Alohaliu/cra-antd-cli#readme",
+  "homepage": "https://github.com/Alohaliu/cra-am-cli#readme",
   "dependencies": {
     "chalk": "^3.0.0",
     "commander": "^4.0.1",
